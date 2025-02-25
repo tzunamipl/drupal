@@ -22,14 +22,17 @@ services:
     networks:
       - d-network
     volumes:
-      - /var/www/html/modules
-      - /var/www/html/profiles
-      - /var/www/html/themes
-      - /var/www/html/d-course
+      - type: bind
+        source: /mnt/c/Workspace/labs/drupal/modules
+        target: /var/www/html/modules
+      - type: bind
+        source: /mnt/c/Workspace/labs/drupal/profiles
+        target: /var/www/html/profiles
+      #- /mnt/c/Workspace/labs/drupal/sites:/var/www/html/sites
+      #- /var/www/html/themes:/var/www/html/
       # this takes advantage of the feature in Docker that a new anonymous
       # volume (which is what we're creating here) will be initialized with the
       # existing content of the image at the same location
-      - /var/www/html/sites
     restart: always
     depends_on:
       - mysql
